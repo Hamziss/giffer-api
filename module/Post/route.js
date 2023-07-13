@@ -10,10 +10,10 @@ router.get("/", async (req, res) => {
 
 })
 
-const addPost = async (animal) => {
-  const newPost = new Post(animal);
+const addPost = async (post) => {
+  const newPost = new Post(post);
   const added = await newPost.save();
-  if (!added) throw new Error('Todo not added');
+  if (!added) throw new Error('post not added');
   return added._doc;
 };
 router.post("/add", async (req, res) => {

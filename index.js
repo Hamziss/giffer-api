@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(bodyParser.json())
 app.use(cors(
   {
-    origin: ["http://localhost:5173", "https://giffer-ochre.vercel.app"],
+    origin: "*"
   }
 ));
 
