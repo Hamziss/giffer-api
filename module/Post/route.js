@@ -16,11 +16,19 @@ const addPost = async (post) => {
   if (!added) throw new Error('post not added');
   return added._doc;
 };
+
 router.post("/add", async (req, res) => {
   const Post = req.body;
-  const added = await addPost(Post);
-  res.status(200).json(added);
+  try {
+    const added = await addPost(Post);
+    res.status(200).json(added);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: "error in the controller" });
+  }
+
 })
+
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {

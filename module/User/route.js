@@ -11,11 +11,15 @@ const addUser = async (user) => {
 
 router.post("/", async (req, res) => {
   const user = req.body;
-  const exist = await User.findOne({ avatar: user.avatar });
-  if (exist) return res.json(exist);
-  const added = await addUser(user);
-  res.status(200).json(added);
-
+  try {
+    const exist = await User.findOne({ avatar: user.avatar });
+    if (exist) return res.json(exist);
+    const added = await addUser(user);
+    res.status(200).json(added);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: "error in the controller" });
+  }
 })
 router.delete("/deleteAll", async (req, res) => {
   const deleted = await User.deleteMany({});
